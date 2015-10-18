@@ -1,4 +1,4 @@
-
+clear
 % (Values from Lay Example 4)
 
 % 2xn payoff matrix
@@ -14,8 +14,8 @@ th = 0:resolution:1; % higher t resultion needed
 zh = (1-th')*A(1,:)+th'*A(2,:);
 
 lowest_z_values = min(zh')';
-M_z = max(mz);
-M_t = (find(mz==max(lowest_z_values))-1) .* resolution;
+M_z = max(lowest_z_values);
+M_t = (find(lowest_z_values==max(lowest_z_values))-1) .* resolution;
 
 M = [M_t, M_z]
 
@@ -25,5 +25,5 @@ optimal_strategy_x = [1-M_t; M_t]
 plot(t, z, 'b',...   
      th, lowest_z_values, 'r.',...     
      M_t, M_z, 'bo')
- xlabel('t')
- ylabel('z')
+xlabel('t')
+ylabel('z')
