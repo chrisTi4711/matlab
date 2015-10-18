@@ -1,4 +1,4 @@
-
+clear
 % (Values from Lay Example 3)
 
 % Payoff matrix (amount R wins from C):
@@ -11,6 +11,8 @@ A = [
 % Probability vectors:
 x = [0.25  0.5 0.25]';
 y = [0.25 0.25 0.5 ]';
+
+format rat 
 
 disp('Worst that could happen to R for each decision:')
 row_minimas = min(A')'
@@ -26,7 +28,9 @@ disp('Expected payoff E(x,y):')
 x'*A*y
 
 disp('Value of the strategy v(x):')
+x'*A*eye(size(A))
 min(x'*A*eye(size(A)))
 
 disp('Value of the strategy v(y):')
+(eye(size(A))'*A*y)'
 max(eye(size(A))'*A*y)
