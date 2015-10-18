@@ -1,3 +1,5 @@
+% solve linear equations
+
 A = [ 
     4 2 0
     1 2 5
