@@ -1,3 +1,6 @@
+% 1. Calculate intersection between two selected inequaltities.
+% 2. Check if the intersection point is in the feasible set.
+
 A = [ 
     5 2
     .2 .4
