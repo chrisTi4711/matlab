@@ -13,9 +13,9 @@ accuracy = 1e-5;
 fprintf('k  x  \n'); 
 for k=1:20
     x_new = x_curr - ((x_curr - x_old)./(ff(x_curr)-ff(x_old))).*ff(x_curr);
-    e = abs(x_curr-x_new);
+    e = abs(x_curr-x_new)/abs(x_new);
     fprintf('%d: %f\n', k, x_new); 
-    if (abs(x_curr-x_new) < x_new*accuracy)
+    if (e < accuracy)
         break
     end
     x_old = x_curr;
