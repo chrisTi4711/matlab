@@ -1,15 +1,43 @@
-f = @(x) x.^4 - 14*x.^3 + 60*x.^2 - 70*x;
+clc
 
-% start range:
-a0 = 0;
-b0 = 2;
+f = @(x) 8.*exp(1-x)+7.*log(x);
 
-% stop at this accuracy (b-a):
-accuracy = 0.3;
+left = 1;
+right = 2;
+uncert = 0.23;
 
-% otherwise stop after this number of function evalutions:
-max_func_evals = 20;
+rho = (3-sqrt(5))/2;
 
-[a,b] = gss(f,a0,b0,accuracy,max_func_evals);
-final_range = [a,b]
-final_accuracy = b - a
+N = ceil(log(uncert/(right-left))/log(1-rho))
+
+lower='a';
+a=left+(1-rho)*(right-left);
+f_a=f(a);
+fprintf('-------------------------------------------------------------------------------------\n');
+fprintf('k     a           b           f(a)        f(b)   lower    New uncertainity interval  \n');
+fprintf('-------------------------------------------------------------------------------------\n');
+for i=1:N
+    if lower=='a'
+        b=a;%
+        f_b=f_a;%
+        a=left+rho*(right-left);%
+        f_a=f(a);%
+    else
+        a=b;%
+        f_a=f_b;%
+        b=left+(1-rho)*(right-left);%
+        f_b=f(b);%
+    end
+    if f_a<f_b
+        right=b;
+        lower='a';%
+    else
+        left=a;
+        lower='b';%
+    end
+    New_Interval = [left,right];%
+    
+    fprintf('%i: %f    %f    %f    %f    %c        [%f %f] \n', i, a, b, f_a, f_b, lower, left, right);
+end
+
+fprintf('\nfinal accuracy after %i iterations:\n   %f < %f\n', N, right - left, uncert);
