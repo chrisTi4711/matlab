@@ -18,4 +18,7 @@ condA = norm(A, inf) * norm(A^-1, inf)
 fprintf('relative error bounds:\n')
 lower = 1/condA*relative_residual;
 upper =   condA*relative_residual;
-fprintf('   %f <= %f <= %f\n', lower, relative_error, upper);
+fprintf('   %f <= %f <= %f\n\n', lower, relative_error, upper);
+
+gradient = 2*(A'*A*x)-2*A'*b
+fprintf('FONC: %i\n\n', ~any(gradient))
