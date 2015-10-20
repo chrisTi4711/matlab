@@ -4,7 +4,7 @@ A = [3 2; 1 1];
 b = [5 2]';
 xcomp = [1.1 0.88]';
 
-x = A\b; %same as: (A'*A)^(-1)*A'*b
+x = A\b %same as: (A'*A)^(-1)*A'*b
 
 e = x - xcomp
 absolute_error = norm(e, inf)
