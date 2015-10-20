@@ -21,4 +21,16 @@ upper =   condA*relative_residual;
 fprintf('   %f <= %f <= %f\n\n', lower, relative_error, upper);
 
 gradient = 2*(A'*A*x)-2*A'*b
-fprintf('FONC: %i\n\n', ~any(gradient))
+if ~any(gradient)    
+    fprintf('-> FONC: fulfilled\n\n')
+else
+    fprintf('-> FONC: NOT fulfilled\n\n')
+end
+
+fprintf('  rank A < rank [A,b]\n');
+fprintf('%f < %f\n', rank(A), rank([A,b]));
+if rank(A) ~= rank([A,b])    
+    fprintf('-> b does not belong to the range of A\n')
+    fprintf('   Thus the system of equations is inconsistent!\n\n')
+end
+
