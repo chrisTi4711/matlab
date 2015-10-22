@@ -8,7 +8,8 @@ uncert = 0.23;
 
 rho = (3-sqrt(5))/2;
 
-N = ceil(log(uncert/(right-left))/log(1-rho))
+N = log(uncert/(right-left))/log(1-rho)
+N = ceil(N)
 
 lower='a';
 a=left+(1-rho)*(right-left);
