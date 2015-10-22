@@ -1,29 +1,29 @@
-clear
-% (Values from Lay Example 4)
+clear;clc;
+% (Values from Lay Exercise 15)
 
-% 2xn payoff matrix
-A = [ 1 5 3 6; 4 0 1 2];
+% 2xn payoff matrix (REMOVE DOMINATING COLUMNS!)
+A = [4 2 0;1 2 5];
 
-% Print matrix from which the column lines can be drawn:
-t = 0:1;
-z = (1-t')*A(1,:)+t'*A(2,:)
+% Calculate v(x)
+t = 0:0.0001:1;
+vx = min(A'*[1-t;t])';
 
-% Calculate highest point M
-resolution = 0.0001;
-th = 0:resolution:1; % higher t resultion needed
-zh = (1-th')*A(1,:)+th'*A(2,:);
+% Calculate M from two intersecting lines (choose one on vx!)
+lineA = 2; %col in A
+lineB = 3; %col in A
+syms tM
+fA = A(:,lineA)'*[1-tM;tM];
+fB = A(:,lineB)'*[1-tM;tM];
+tM = solve(fA==fB);
+zM = eval(fA);
+M = [tM zM];
 
-lowest_z_values = min(zh')';
-M_z = max(lowest_z_values);
-M_t = (find(lowest_z_values==max(lowest_z_values))-1) .* resolution;
-
-M = [M_t, M_z]
-
-optimal_strategy_x = [1-M_t; M_t]
+optimal_strategy_x = [1-tM; tM]
+optimal_strategy_y = [A;ones(1,size(A,2))]\[zM zM 1]'
 
 % print graph
-plot(t, z, 'b',...   
-     th, lowest_z_values, 'r.',...     
-     M_t, M_z, 'bo')
+plot(0:1, A, 'b',...   
+     t, vx, 'r.',...     
+     tM, zM, 'bo')
 xlabel('t')
 ylabel('z')
