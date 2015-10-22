@@ -1,3 +1,4 @@
+clear;clc;
 % Lay p.54 Exercise 21
 % Solution see HW 3
 
