@@ -1,4 +1,4 @@
-clc
+clear;clc
 % 1. Calculate the gradient and the hessian matrix of a function.
 % 2. Check FONC for specific point x.
 
@@ -7,6 +7,9 @@ f = x1^2 + 3*x2^2 - 2*x1*x2 + 3*x2
 
 grad = gradient(f, [x1, x2])
 hess = hessian (f, [x1, x2])
+
+[mx1,mx2] = solve(grad==0,[x1 x2]);
+FONC_fullfilling_x = [mx1 mx2] % could be used in next step 
 
 x = [-.75;-.75] % point to check 
 
